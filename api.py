@@ -117,15 +117,18 @@ class PetFriends:
             result = res.text
         return status, result
 
-    def set_photo(self, auth_key, pet_id, pet_photo):
+    def set_photo(self, auth_key: json, pet_id: str, pet_photo: str) -> json:
 
-        headers = {
-            'auth_key': auth_key['key']
-        }
         data = MultipartEncoder(
             fields={
                 'pet_photo': (pet_photo, open(pet_photo, 'rb'), 'images/jpg')
             })
+
+        headers = {
+            'Content-Type': data.content_type,
+            'auth_key': auth_key['key']
+        }
+
         res = requests.post(self.base_url + 'api/pets/set_photo/' + pet_id, headers=headers, data=data)
         status = res.status_code
         result = ""

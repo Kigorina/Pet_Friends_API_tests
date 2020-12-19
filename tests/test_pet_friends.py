@@ -108,7 +108,7 @@ def test_set_photo_successfully(pet_photo='images/racoon.jpg'):
     if len(my_pets['pets']) > 0:
         status, result = pf.set_photo(auth_key, my_pets['pets'][0]['id'], pet_photo)
         assert status == 200
-        assert result['name'] == name
+        
 
 
 
